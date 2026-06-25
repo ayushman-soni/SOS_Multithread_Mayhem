@@ -1,0 +1,45 @@
+Week 3 Report
+
+Name: Ayushman Soni
+Roll No: 24B0679
+
+Problems Attempted:
+
+1. Problem 1 - Parallel Statistics
+2. Problem 2 - Semaphore Bounded Buffer
+
+Problem 1:
+
+In this problem, I divided a large array among multiple threads and used each thread to calculate partial statistics. Each thread computed the sum, minimum, and maximum value for its assigned range.
+
+After all threads finished, the main thread joined them and combined the partial results to get the final sum, minimum, maximum, and average.
+
+I tested the program using different numbers of threads such as 1, 2, 4 and 8. The final results remained the same in all cases, which showed that the implementation was working correctly.
+
+Problem 2:
+
+For this problem, I implemented a bounded buffer using semaphores and a mutex. Producers insert items into the buffer and consumers remove them.
+
+The semaphore for empty slots keeps track of available space in the buffer, while the semaphore for full slots keeps track of available items. A mutex is used to ensure that only one thread modifies the buffer at a time.
+
+I tested the program with multiple producers and consumers and also tried different buffer sizes. The produced and consumed counts matched correctly in all the tests I performed.
+
+Difference from Week 2:
+
+In Week 2, I used condition variables along with a mutex. In this week's version, semaphores handled the counting of available items and free slots directly. Because of that, the code felt a bit simpler and easier to follow once I understood how semaphores work.
+
+Testing:
+
+* Tested with multiple producer and consumer threads.
+* Tested with different buffer sizes.
+* Verified that produced and consumed item counts matched.
+* Verified that the sums matched correctly.
+* Ran the program multiple times to check consistency.
+
+One Thing That Surprised Me:
+
+I was surprised by how useful semaphores are for producer-consumer problems. Initially they looked more confusing than condition variables, but after implementing the buffer, their purpose became much clearer.
+
+Challenges Faced:
+
+The main difficulty was understanding thread return values and semaphores in the beginning. It took some experimentation and reading through the theory to understand how they work in practice.
