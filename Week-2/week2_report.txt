@@ -1,0 +1,49 @@
+Week 2 Report
+# Name : Ayushman soni
+# Roll No. : 24B0679
+
+Problems Attempted:
+
+1. Problem 1 - Fix Last Week's Mess
+2. Problem 2 - Thread Safe Bounded Buffer
+
+Problem 1:
+
+In this problem, I fixed the race conditions present in the parallel sum and bank account programs using mutexes.
+
+For parallel_sum_fixed.c, the issue was that multiple threads were updating the shared total variable at the same time. I added a mutex lock around the update operation so only one thread could modify the variable at a time.
+
+For bank_chaos_fixed.c, I protected the balance check and withdrawal operation using a mutex. After the fix, the balance remained correct and the program behaved consistently.
+
+I ran both programs multiple times and got correct results every time.
+
+Comparison with Original Version:
+
+The original programs sometimes gave different outputs because of race conditions. After adding synchronization, the outputs became consistent. The fixed versions were slightly slower because threads now have to wait for the lock before accessing shared data.
+
+Problem 2:
+
+I implemented a bounded buffer using a mutex and condition variables. Producers add items to the buffer and consumers remove them.
+
+If the buffer becomes full, producers wait until space is available. If the buffer becomes empty, consumers wait until an item is produced.
+
+Testing Done:
+
+* Tested with 3 producer threads and 2 consumer threads.
+* Checked that the total number of produced items matched the total number of consumed items.
+* Verified that the sum of produced values matched the sum of consumed values.
+* Ran the program multiple times to make sure the output remained correct.
+
+Edge Cases Considered:
+
+* Empty buffer condition.
+* Full buffer condition.
+* Multiple producers and consumers accessing the buffer at the same time.
+
+One Thing That Surprised Me:
+
+I knew race conditions could cause incorrect results, but I did not realize that fixing them with locks can create new issues like deadlocks if locks are not used carefully.
+
+Challenges Faced:
+
+Understanding condition variables took some time, especially why pthread_cond_wait() is used inside a while loop instead of an if statement. After reading the theory and running the examples, the producer-consumer pattern became much clearer.
